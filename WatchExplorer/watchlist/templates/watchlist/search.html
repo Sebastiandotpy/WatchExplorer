@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Search Watch Data</h1>
-    <form action="{% url 'results' %}" method="post">
+    <form action="{% url 'watchlist:search' %}" method="post">
         {% csrf_token %}
         <!-- Add your search form fields here -->
         <input type="submit" value="Search">
