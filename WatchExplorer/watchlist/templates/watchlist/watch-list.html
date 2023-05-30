@@ -1,0 +1,19 @@
+<!-- watch-list.html -->
+<h1>Watch List</h1>
+
+{% if saved_watch_data %}
+  <ul>
+    {% for watch in saved_watch_data %}
+      <li>
+        <strong>Title:</strong> {{ watch.title }}<br>
+        <strong>Brand:</strong> {{ watch.brand }}<br>
+        <strong>Model:</strong> {{ watch.model }}<br>
+        <strong>Post Date:</strong> {{ watch.post_date }}<br>
+        <strong>Source:</strong> {{ watch.source }}<br>
+        <strong>User Name:</strong> {{ watch.user_name }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No watch data available.</p>
+{% endif %}

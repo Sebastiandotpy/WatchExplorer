@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Watch Data</title>
+</head>
+<body>
+    <h1>Search Watch Data</h1>
+    <form action="{% url 'results' %}" method="post">
+        {% csrf_token %}
+        <!-- Add your search form fields here -->
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

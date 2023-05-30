@@ -1,0 +1,23 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Watch Data</h1>
+    {% if saved_watch_data %}
+        <ul>
+            {% for watch_data in saved_watch_data %}
+                <li>{{ watch_data.name }}</li>
+                <li>{{ watch_data.brand }}</li>
+                <li>{{ watch_data.price }}</li>
+                <!-- Include other fields as needed -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No watch data available.</p>
+    {% endif %}
+</body>
+</html>
