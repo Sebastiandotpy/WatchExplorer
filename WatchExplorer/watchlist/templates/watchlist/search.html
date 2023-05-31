@@ -1,14 +1,62 @@
 <!DOCTYPE html>
+{% load static %}
+<!-- watch-list.html -->
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Search Watch Data</title>
+    <title>Watch List</title>
+    <link rel="stylesheet" href="{% static 'watchlist/css/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        li {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        .no-data {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+
+
+            
+        }
+    </style>
 </head>
 <body>
-    <h1>Search Watch Data</h1>
-    <form action="{% url 'results' %}" method="post">
-        {% csrf_token %}
-        <!-- Add your search form fields here -->
-        <input type="submit" value="Search">
-    </form>
+    <h1>Watch List</h1>
+
+    {% if saved_watch_data %}
+    <ul>
+        {% for watch in saved_watch_data %}
+        <li>
+            <strong>Title:</strong> {{ watch.title }}<br>
+            <strong>Brand:</strong> {{ watch.brand }}<br>
+            <strong>Model:</strong> {{ watch.model }}<br>
+            <strong>Post Date:</strong> {{ watch.post_date }}<br>
+            <strong>Source:</strong> {{ watch.source }}<br>
+            <strong>User Name:</strong> {{ watch.user_name }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-data">No watch data available.</p>
+    {% endif %}
+
 </body>
 </html>

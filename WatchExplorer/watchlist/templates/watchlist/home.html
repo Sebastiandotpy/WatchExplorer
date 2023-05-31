@@ -1,23 +1,80 @@
 <!-- home.html -->
+{% load static %}
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Home</title>
+    <link rel="stylesheet" href="{% static 'watchlist/css/styles.css' %}">
+    <style>
+        .hero-image {
+            background-image: url('https://cdn.media.amplience.net//i/currysprod/apple_watch_hero_full_width');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 100px 0; /* Adjust the padding as needed */
+            text-align: center;
+            color: #ffffff;
+            font-size: 32px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Watch Data</h1>
-    {% if saved_watch_data %}
-        <ul>
-            {% for watch_data in saved_watch_data %}
-                <li>{{ watch_data.name }}</li>
-                <li>{{ watch_data.brand }}</li>
-                <li>{{ watch_data.price }}</li>
-                <!-- Include other fields as needed -->
+    <div class="container">
+        <div class="hero-image">
+            <h1>Welcome to Watch Explorer</h1>
+        </div>
+
+        <h2>Categories:</h2>
+        <ul class="categories-list">
+            {% for category in watch_categories %}
+                <li>{{ category.name }}</li>
+                <ul class="watch-list">
+                    {% for watch_data in category.watch_data %}
+                        <li>
+                            <div class="watch-item">
+                                <div class="watch-image">
+                                    <img src="{{ watch_data.image }}" alt="{{ watch_data.title }}">
+                                </div>
+                                <div class="watch-details">
+                                    <p class="watch-brand">{{ watch_data.brand }}</p>
+                                    <p class="watch-model">{{ watch_data.model }}</p>
+                                    <p class="watch-price">{{ watch_data.price }}</p>
+                                    <p class="watch-user"><strong>User Name:</strong> {{ watch_data.user_name }}</p>
+                                    <p class="watch-source"><strong>Source:</strong> {{ watch_data.source }}</p>
+                                    <p class="watch-reference"><strong>Reference Number:</strong> {{ watch_data.reference_number }}</p>
+                                    <p class="watch-post-date"><strong>Post Date:</strong> {{ watch_data.post_date }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% endfor %}
         </ul>
-    {% else %}
-        <p>No watch data available.</p>
-    {% endif %}
+
+        {% if saved_watch_data %}
+            <h2>Your Saved Watch Data:</h2>
+            <div class="watch-block">
+                {% for watch_data in saved_watch_data %}
+                    <div class="watch-item">
+                        <div class="watch-image">
+                            <img src="{{ watch_data.image }}" alt="{{ watch_data.title }}">
+                        </div>
+                        <div class="watch-details">
+                            <p class="watch-brand">{{ watch_data.brand }}</p>
+                            <p class="watch-model">{{ watch_data.model }}</p>
+                            <p class="watch-price">{{ watch_data.price }}</p>
+                            <p class="watch-user"><strong>User Name:</strong> {{ watch_data.user_name }}</p>
+                            <p class="watch-source"><strong>Source:</strong> {{ watch_data.source }}</p>
+                            <p class="watch-reference"><strong>Reference Number:</strong> {{ watch_data.reference_number }}</p>
+                            <p class="watch-post-date"><strong>Post Date:</strong> {{ watch_data.post_date }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-results">No watch data available.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

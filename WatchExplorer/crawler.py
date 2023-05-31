@@ -5,17 +5,15 @@ from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from datetime import datetime
+from pytz import timezone
 
 # Set up Django environment
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WatchExplorer.settings')
 django.setup()
 
-from watchlist.models import WatchData
+from watchlist.models import WatchData, Category
 
 def scrape_watch_data():
-    # Path to the ChromeDriver executable
-    driver_path = "C:/Users/black/Downloads/chromedriver_win32/chromedriver.exe"  # Update this line with the actual path
-
     # Create a new instance of the Chrome driver
     driver = webdriver.Chrome(ChromeDriverManager().install())
 
@@ -34,7 +32,7 @@ def scrape_watch_data():
 
         count = 0
         for item in gallery_items:
-            if count >= 1:  # Limit to 5 entries
+            if count >= 5:  # Limit to 5 entries
                 break
 
             print("---")
@@ -56,8 +54,20 @@ def scrape_watch_data():
                 model = ""
             print("Model:", model)
 
-            # Get the current date and time
-            current_datetime = datetime.now()
+            # Extract the price
+            try:
+                price_element = item.find_element("css selector", ".priceInfo")
+                price = price_element.text.strip()
+            except NoSuchElementException:
+                try:
+                    price_element = item.find_element("css selector", ".listing__tag.listing__tag--sell")
+                    price = price_element.text.strip()
+                except NoSuchElementException:
+                    price = ""
+            print("Price:", price)
+
+            # Get the current date and time with time zone information
+            current_datetime = datetime.now(timezone('Europe/Berlin'))
 
             # Convert the datetime object to the desired format
             post_date = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -72,14 +82,23 @@ def scrape_watch_data():
             user_name = user_name_element.text.strip()
             print("User Name:", user_name)
 
+            # Fetch the category by name
+            category_name = "Watch datas"  # Replace with the actual category name
+            try:
+                category = Category.objects.get(name=category_name)
+            except Category.DoesNotExist:
+                category = None
+
             # Create an instance of WatchData model
             watch_data = WatchData(
                 title=title,
                 brand=brand,
                 model=model,
+                price=price,
                 post_date=post_date,
                 source=source,
-                user_name=user_name
+                user_name=user_name,
+                category=None
             )
 
             # Save the watch data

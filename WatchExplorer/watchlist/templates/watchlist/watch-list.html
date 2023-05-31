@@ -1,19 +1,57 @@
-<!-- watch-list.html -->
-<h1>Watch List</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Watch List</title>
+    <link rel="stylesheet" href="{% static 'watchlist/css/styles.css' %}">
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        li {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        .no-data {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Watch List</h1>
 
-{% if saved_watch_data %}
-  <ul>
-    {% for watch in saved_watch_data %}
-      <li>
-        <strong>Title:</strong> {{ watch.title }}<br>
-        <strong>Brand:</strong> {{ watch.brand }}<br>
-        <strong>Model:</strong> {{ watch.model }}<br>
-        <strong>Post Date:</strong> {{ watch.post_date }}<br>
-        <strong>Source:</strong> {{ watch.source }}<br>
-        <strong>User Name:</strong> {{ watch.user_name }}
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No watch data available.</p>
-{% endif %}
+    {% if saved_watch_data %}
+        <ul>
+            {% for watch in saved_watch_data %}
+                <li>
+                    <h3>{{ watch.title }}</h3>
+                    <p><strong>Brand:</strong> {{ watch.brand }}</p>
+                    <p><strong>Model:</strong> {{ watch.model }}</p>
+                    <p><strong>Post Date:</strong> {{ watch.post_date }}</p>
+                    <p><strong>Source:</strong> {{ watch.source }}</p>
+                    <p><strong>User Name:</strong> {{ watch.user_name }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-data">No watch data available.</p>
+    {% endif %}
+</body>
+</html>

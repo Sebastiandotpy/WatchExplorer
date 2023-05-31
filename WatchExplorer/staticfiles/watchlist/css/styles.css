@@ -1,0 +1,91 @@
+/* styles.css */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #221f1f;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.categories-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.categories-list li {
+  margin-bottom: 10px;
+}
+
+.watch-list {
+  list-style-type: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.watch-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.watch-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.watch-details {
+  flex-grow: 1;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.watch-details li {
+  margin-bottom: 5px;
+}
+
+.watch-info {
+  display: flex;
+}
+
+.watch-info-left {
+  flex: 1;
+}
+
+.watch-info-right {
+  flex: 1;
+}
+
+.watch-brand,
+.watch-model,
+.watch-price,
+.watch-user,
+.watch-source,
+.watch-reference,
+.watch-post-date {
+  margin: 0;
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 20px;
+  color: #999;
+}
